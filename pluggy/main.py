@@ -76,7 +76,7 @@ async def main():
 
         point = (
             Point("tapo")
-            .tag("location", "office")
+            .tag("location", details['location'])
             .tag("name", name)
             .field("on", 1 if device_info.device_on else 0)
         )
