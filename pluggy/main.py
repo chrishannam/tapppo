@@ -29,6 +29,11 @@ PLUGS = {
             'ip_address': '192.168.0.52',
             'location': 'front room',
         },
+    'driving rig lighting':
+        {
+            'ip_address': '192.168.0.56',
+            'location': 'office',
+        },
     'heater':
         {
             'ip_address': '192.168.0.57',
@@ -38,7 +43,7 @@ PLUGS = {
     # 'clothes dryer':
     #     {
     #         'ip_address': '192.168.0.59',
-    #         'location': 'office',
+    #         'location': 'dining room',
     #     },
     'desk':
         {
@@ -53,7 +58,11 @@ async def main():
 
     for name, details in PLUGS.items():
         print(f"Starting {name} -> {details['ip_address']}")
-        device = await client.p110(details['ip_address'])
+        try:
+            device = await client.p110(details['ip_address'])
+        except Exception:
+            print("Failed! Maybe the plug is off at the wall?")
+            continue
 
         influx_client = influxdb_client.InfluxDBClient(url=URL, token=TOKEN, org=ORG)
         write_api = influx_client.write_api(write_options=SYNCHRONOUS)
