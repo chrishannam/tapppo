@@ -29,11 +29,6 @@ PLUGS = {
             'ip_address': '192.168.0.52',
             'location': 'front room',
         },
-    'driving rig lighting':
-        {
-            'ip_address': '192.168.0.56',
-            'location': 'office',
-        },
     'heater':
         {
             'ip_address': '192.168.0.57',
